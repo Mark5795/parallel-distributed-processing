@@ -1,15 +1,15 @@
 ordersCSV = LOAD '/user/maria_dev/diplomacy/orders.csv'
-			      USING PigStorage(',') AS
-            (game_id,
-			      unit_id,
-            unit_order,
-            location,
-            target_dest,
-            succes,
-            reason,
-            turn_num);
-            targeted = FILTER ordersCSV BY target_dest == '"Holland"';
-            grouped = GROUP targeted BY location;
-            counted = FOREACH grouped GENERATE group,'"Holland"',COUNT(targeted);
-            ordered = ORDER counted BY group;
+		USING PigStorage(',') AS
+            	(game_id,
+		unit_id,
+		unit_order,
+		location,
+		target_dest,
+		succes,
+		reason,
+		turn_num);
+		targeted = FILTER ordersCSV BY target_dest == '"Holland"';
+		grouped = GROUP targeted BY location;
+		counted = FOREACH grouped GENERATE group,'"Holland"',COUNT(targeted);
+		ordered = ORDER counted BY group;
 DUMP ordered;
